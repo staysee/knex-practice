@@ -35,10 +35,10 @@ function paginateItems(pageNumber){
         })
 }
 
-paginateItems(2)
+paginateItems(1)
 
 //3. Get all items added after date
-function itemsAddedAfterDate(daysAgo){
+function itemsAddedAfterDaysAgo(daysAgo){
     knexInstance
         .select('id', 'name', 'date_added')
         .from('shopping_list')
@@ -53,16 +53,17 @@ function itemsAddedAfterDate(daysAgo){
         })
 }
 
-itemsAddedAfterDate(5)
+itemsAddedAfterDaysAgo(5)
 
 //4. Get total cost for each category
 function totalCostPerCategory(){
     knexInstance
         .select('category')
         .from('shopping_list')
-        .sum('')
+        .sum('price AS total')
+        .groupBy('category')
         .then(result => {
-            console.log('COST PER CATEGORy')
+            console.log('COST PER CATEGORY')
             console.log(result)
         })
 }
