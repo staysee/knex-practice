@@ -76,7 +76,7 @@ describe(`Articles service object`, function() {
                 })
         })
 
-        if(`updateArticle() updates an article from the 'blogful_articles' table`, () => {
+        it(`updateArticle() updates an article from the 'blogful_articles' table`, () => {
             const idOfArticleToUpdate = 3
             const newArticleData = {
                 title: 'updated title',
