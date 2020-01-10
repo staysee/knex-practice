@@ -1,7 +1,7 @@
 const ShoppingListService = require('../src/shopping-list-service')
 const knex = require('knex')
 
-describe(`Shopping List service object`, function() {
+describe.only(`Shopping List service object`, function() {
     let db 
     let testItems = [
         {
@@ -89,13 +89,16 @@ describe(`Shopping List service object`, function() {
                 name: 'updated item',
                 price: 0.99,
                 date_added: new Date(),
-                checked: true
+                checked: true,
             }
+
+            const originalItem = testItems[idOfItemToUpdate - 1]
             return ShoppingListService.updateItem(db, idOfItemToUpdate, newItemData)
                 .then(() => ShoppingListService.getById(db, idOfItemToUpdate))
                 .then(article => {
                     expect(article).to.eql({
                         id: idOfItemToUpdate,
+                        ...originalItem,
                         ...newItemData
                     })
                 })
